@@ -1,0 +1,42 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: dostavca-packet-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dostavca-packet
+    spec:
+      containers:
+      - image: zanozbot/dostavca-packet:latest
+        name: dostavca-notifications
+        env:
+          - name: KUMULUZEE_DISCOVERY_CLUSTER
+            value: gcp-kube
+          - name: KUMULUZEE_DISCOVERY_ETCD_HOSTS
+            value: http://etcd:2379
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 20
+          periodSeconds: 15
+        ports:
+        - containerPort: 8080
+          name: server
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dostavca-packet-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: dostavca-packet
