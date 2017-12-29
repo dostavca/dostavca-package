@@ -1,6 +1,6 @@
 FROM openjdk:8-jre-alpine
 
-COPY notifications/target /usr/src/dostavca/packet
+COPY packet/target /usr/src/dostavca/packet
 
 WORKDIR /usr/src/dostavca/packet
 
