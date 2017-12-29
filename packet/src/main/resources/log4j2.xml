@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration name="auth-logging">
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %p %marker %m %X %ex %n"/>
+        </Console>
+
+        <!-- A socket definition for sending logs into Logstash using TCP and JSON format.-->
+        <Socket name="logstash" host="b789fc8c-408e-48fc-8a42-14a3d27dafa1-ls.logit.io" port="16421" protocol="tcp">
+           <JSONLayout complete="false" compact="true" eventEol="true" charset="UTF-8" properties="true"/>
+        </Socket>
+
+    </Appenders>
+    <Loggers>
+        <!-- Default logger -->
+        <Root level="trace">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="logstash"/>
+        </Root>
+    </Loggers>
+</Configuration>

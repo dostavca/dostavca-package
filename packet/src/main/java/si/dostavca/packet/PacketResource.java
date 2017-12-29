@@ -7,6 +7,7 @@ import org.eclipse.microprofile.faulttolerance.Fallback;
 import org.eclipse.microprofile.metrics.annotation.Metered;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
@@ -15,17 +16,18 @@ import javax.ws.rs.core.Response;
 import java.util.Optional;
 
 @Log
-@Metered
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("packet")
 @RequestScoped
 public class PacketResource {
 
-    @DiscoverService(value = "dostavca-notifications")
+    @Inject
+    @DiscoverService(value = "dostavca-notifications", version = "1.0.x", environment = "dev")
     Optional<WebTarget> targetNotifications;
 
-    @DiscoverService(value = "dostavca-driver")
+    @Inject
+    @DiscoverService(value = "dostavca-driver", version = "1.0.x", environment = "dev")
     Optional<WebTarget> targetDriver;
 
     @GET
