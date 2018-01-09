@@ -6,7 +6,7 @@
         </Console>
 
         <!-- A socket definition for sending logs into Logstash using TCP and JSON format.-->
-        <Socket name="logstash" host="b789fc8c-408e-48fc-8a42-14a3d27dafa1-ls.logit.io" port="16421" protocol="tcp">
+        <Socket name="logstash" host="34c072a5-702a-4c74-91a5-533684e21cd0-ls.logit.io" port="17834" protocol="tcp">
            <JSONLayout complete="false" compact="true" eventEol="true" charset="UTF-8" properties="true"/>
         </Socket>
 
