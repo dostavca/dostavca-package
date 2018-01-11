@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - image: zanozbot/dostavca-packet:latest
-        name: dostavca-notifications
+        name: dostavca-packet
         env:
           - name: KUMULUZEE_DISCOVERY_CLUSTER
             value: gcp-kube
